@@ -1,29 +1,20 @@
 function Green_hill () {
     list = [
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "3846470000000000000000000000000000000000",
-    "3937433840384038403840384038403840384038",
-    "3739373937393739373937393739373937393739",
-    "3937393739373937393739373937393739373937",
-    "3739373937393739373937393739373937393739",
-    "3937393739373937393739373937393739373937",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000"
+    "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "38464700000000000000000000000000000000000000000000000000000000000000000000000000",
+    "39374338403840384038403840384038403840384038403840384038403840384038403840384038",
+    "37393739373937393739373937393739373937393739373937393739373937393739373937393739",
+    "39373937393739373937393739373937393739373937393739373937393739373937393739373937",
+    "37393739373937393739373937393739373937393739373937393739373937393739373937393739",
+    "39373937393739373937393739373937393739373937393739373937393739373937393739373937"
     ]
     Tiles = [
     img`
@@ -555,6 +546,16 @@ function Green_hill () {
         e 8 4 8 4 4 4 4 
         4 e 4 e 4 4 4 4 
         4 4 4 4 4 4 4 4 
+        `,
+    img`
+        . f . . . . . . 
+        f 5 f . . . . . 
+        . f . . . . . . 
+        . . . . . . . . 
+        . . . . . . . . 
+        . f . . . . . . 
+        f 5 f . . . . . 
+        . f . . . . . . 
         `
     ]
 }
@@ -1159,18 +1160,19 @@ function Start2 () {
     Green_hill()
     Make_Sonic()
 }
+let Image2: Image = null
+let Num = 0
+let Point: Image = null
+let _2 = 0
+let _1 = 0
+let Time = 0
+let Tile_offset = 0
+let Left = false
 let Num2 = 0
 let Num1 = 0
 let Next_gravity_time = 0
 let Playertilex = 0
 let Playertiley = 0
-let Left = false
-let Image2: Image = null
-let Time = 0
-let Num = 0
-let Point: Image = null
-let _2 = 0
-let _1 = 0
 let frameCount = 0
 let Sonicaceration = 0
 let PlayerVY = 0
@@ -1187,133 +1189,14 @@ let Frame = Mode[0]
 let Speed = 100
 let Last_Time = -1
 let Start = true
+let Score = 1
+let Offset = -40
 game.onUpdate(function () {
     frameCount += 1
 })
 game.onUpdate(function () {
-    for (let value = 0; value <= 23; value++) {
-        for (let index3 = 0; index3 <= 19; index3++) {
-            if (list[value].charCodeAt(index3 * 2) < 90) {
-                _1 = list[value].charCodeAt(index3 * 2) - 48
-            } else {
-                _1 = list[value].charCodeAt(index3 * 2) - 87
-            }
-            if (list[value].charCodeAt(index3 * 2 + 1) < 90) {
-                _2 = list[value].charCodeAt(index3 * 2 + 1) - 48
-            } else {
-                _2 = list[value].charCodeAt(index3 * 2 + 1) - 87
-            }
-            Point = Tiles[_1 * 10 + _2]
-            Num = (value + index3 * 2) * (index3 * 2) + (_1 + _2 * 2) + 1
-            while (Num > Tiles.length - 1) {
-                Num += Number2
-            }
-            while (Num < 0) {
-                Num += 1
-            }
-            for (let V = 0; V <= 7; V++) {
-                for (let index = 0; index <= 7; index++) {
-                    if (_1 * 10 + _2 <= Tiles.length - 1) {
-                        scene.backgroundImage().setPixel(index3 * 8 + index, value * 8 + V, Point.getPixel(index, V))
-                    } else {
-                        scene.backgroundImage().setPixel(index3 * 8 + index, value * 8 + V, Tiles[Num].getPixel(index, V))
-                    }
-                }
-            }
-        }
-    }
-    if (Time != Last_Time) {
-        Last_Time = Time
-        if (0 != Mode[0]) {
-            Frame += 1
-        }
-    }
-    if (Frame <= Mode[1]) {
-        Image2 = img`
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            `
-        if (Left == true) {
-            for (let index2 = 0; index2 <= 15; index2++) {
-                for (let value2 = 0; value2 <= 22; value2++) {
-                    Image2.setPixel(index2, value2, Animations[Frame].getPixel(15 - index2, value2))
-                }
-            }
-        } else {
-            for (let index4 = 0; index4 <= 15; index4++) {
-                for (let value3 = 0; value3 <= 22; value3++) {
-                    Image2.setPixel(index4, value3, Animations[Frame].getPixel(index4, value3))
-                }
-            }
-        }
-        scene.backgroundImage().drawTransparentImage(Image2, PlayerX, PlayerY)
-    } else {
-        Image2 = img`
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            `
-        if (Left == true) {
-            for (let index5 = 0; index5 <= 15; index5++) {
-                for (let value4 = 0; value4 <= 22; value4++) {
-                    Image2.setPixel(index5, value4, Animations[Frame].getPixel(15 - index5, value4))
-                }
-            }
-        } else {
-            for (let index6 = 0; index6 <= 15; index6++) {
-                for (let value5 = 0; value5 <= 22; value5++) {
-                    Image2.setPixel(index6, value5, Animations[Frame].getPixel(index6, value5))
-                }
-            }
-        }
-        Frame = Mode[0]
-        scene.backgroundImage().drawTransparentImage(Image2, PlayerX, PlayerY)
-    }
-    scene.backgroundImage().drawTransparentImage(Animations[Frame], 0, 0)
-})
-game.onUpdate(function () {
     let Nextmovetime = 0
+    console.logValue("x", PlayerX)
     Playertiley = Math.floor(PlayerY / 8)
     Playertilex = Math.floor(PlayerX / 8)
     if (game.runtime() >= Next_gravity_time) {
@@ -1366,6 +1249,10 @@ game.onUpdate(function () {
                 Sonicaceration += 0.1
                 for (let index = 0; index < Math.abs(Sonicaceration); index++) {
                     PlayerX += 1
+                    Offset += 1
+                    if (Offset % 8 == 0 && (Tile_offset > 0 && Tile_offset < 40)) {
+                        Tile_offset += Math.abs(Offset) / 8
+                    }
                 }
             } else {
                 Sonicaceration = 0
@@ -1376,6 +1263,10 @@ game.onUpdate(function () {
                 Sonicaceration += -0.1
                 for (let index = 0; index < Math.abs(Sonicaceration); index++) {
                     PlayerX += -1
+                    Offset += -1
+                    if (Math.abs(Offset) / 8 == 0 && (Tile_offset > 0 && Tile_offset < 40)) {
+                        Tile_offset += -1 + Math.abs(Offset) / 8
+                    }
                 }
             } else {
                 Sonicaceration = 0
@@ -1388,7 +1279,139 @@ game.onUpdate(function () {
 game.onUpdate(function () {
     Time = Math.idiv(game.runtime(), Speed)
 })
-game.onUpdateInterval(1000, function () {
+game.onUpdate(function () {
+    console.logValue("Z", list[0].length)
+    console.logValue("Bob", Offset)
+    console.log(Tile_offset)
+    for (let value = 0; value <= 14; value++) {
+        for (let index3 = 0; index3 <= 20; index3++) {
+            if (list[value].charCodeAt(index3 * 2 + Tile_offset * 2) < 90) {
+                _1 = list[value].charCodeAt(index3 * 2 + Tile_offset * 2) - 48
+            } else {
+                _1 = list[value].charCodeAt(index3 * 2 + Tile_offset * 2) - 87
+            }
+            if (list[value].charCodeAt(index3 * 2 + 1 + Tile_offset * 2) < 90) {
+                _2 = list[value].charCodeAt(index3 * 2 + 1 + Tile_offset * 2) - 48
+            } else {
+                _2 = list[value].charCodeAt(index3 * 2 + 1 + Tile_offset * 2) - 87
+            }
+            Point = Tiles[_1 * 10 + _2]
+            Num = (value + index3 * 2) * (index3 * 2) + (_1 + _2 * 2) + 1
+            while (Num > Tiles.length - 1) {
+                Num += Number2
+            }
+            while (Num < 0) {
+                Num += 1
+            }
+            for (let V = 0; V <= 7; V++) {
+                for (let index = 0; index <= 7; index++) {
+                    if (_1 * 10 + _2 <= Tiles.length - 1) {
+                        scene.backgroundImage().setPixel(index3 * 8 + index - Math.abs(Offset) % 8, value * 8 + V, Point.getPixel(index, V))
+                    } else {
+                        scene.backgroundImage().setPixel(index3 * 8 + index - Math.abs(Offset) % 8, value * 8 + V, Tiles[Num].getPixel(index, V))
+                    }
+                }
+            }
+        }
+    }
+    if (Time != Last_Time) {
+        Last_Time = Time
+        if (0 != Mode[0]) {
+            Frame += 1
+        }
+    }
+    if (Frame <= Mode[1]) {
+        Image2 = img`
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            `
+        if (Left == true) {
+            for (let index2 = 0; index2 <= 15; index2++) {
+                for (let value2 = 0; value2 <= 22; value2++) {
+                    Image2.setPixel(index2, value2, Animations[Frame].getPixel(15 - index2, value2))
+                }
+            }
+        } else {
+            for (let index4 = 0; index4 <= 15; index4++) {
+                for (let value3 = 0; value3 <= 22; value3++) {
+                    Image2.setPixel(index4, value3, Animations[Frame].getPixel(index4, value3))
+                }
+            }
+        }
+        if (PlayerX > 80 && PlayerX < 240) {
+            scene.backgroundImage().drawTransparentImage(Image2, PlayerX - Offset, PlayerY)
+        } else {
+            scene.backgroundImage().drawTransparentImage(Image2, PlayerX, PlayerY)
+        }
+    } else {
+        Image2 = img`
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            ................
+            `
+        if (Left == true) {
+            for (let index5 = 0; index5 <= 15; index5++) {
+                for (let value4 = 0; value4 <= 22; value4++) {
+                    Image2.setPixel(index5, value4, Animations[Frame].getPixel(15 - index5, value4))
+                }
+            }
+        } else {
+            for (let index6 = 0; index6 <= 15; index6++) {
+                for (let value5 = 0; value5 <= 22; value5++) {
+                    Image2.setPixel(index6, value5, Animations[Frame].getPixel(index6, value5))
+                }
+            }
+        }
+        Frame = Mode[0]
+        if (PlayerX > 80 && PlayerX < 240) {
+            scene.backgroundImage().drawTransparentImage(Image2, PlayerX - Offset, PlayerY)
+        } else {
+            scene.backgroundImage().drawTransparentImage(Image2, PlayerX, PlayerY)
+        }
+    }
+})
+game.onUpdateInterval(10, function () {
 	
 })
 game.onUpdateInterval(1, function () {
