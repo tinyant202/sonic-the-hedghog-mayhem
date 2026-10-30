@@ -1,5 +1,5 @@
 {
-    "name": "sonic the hedghog mayhem - Copy",
+    "name": "Galaga",
     "description": "",
     "dependencies": {
         "device": "*"
@@ -34,7 +34,7 @@
         "#00F604",
         "#0042A9",
         "#0061FE",
-        "#A7C6FF",
+        "#982ABC",
         "#A4839F",
         "#5C406c",
         "#E5CDC4",
